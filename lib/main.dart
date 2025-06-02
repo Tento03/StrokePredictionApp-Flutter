@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:strokeprediction/model/History.dart';
 import 'package:strokeprediction/ui/HistoryPage.dart';
 import 'package:strokeprediction/ui/HomePage.dart';
 import 'package:strokeprediction/ui/InfoPage.dart';
 import 'package:strokeprediction/ui/ScanPage.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(HistoryAdapter());
+  await Hive.openBox<History>('historyBox');
   runApp(MyApp());
 }
 
